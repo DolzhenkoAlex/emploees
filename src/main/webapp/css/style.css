@@ -30,13 +30,13 @@ header{
 	border-radius: 5px;
 }
 footer{
-	height: 80px;
+	height: 60px;
 	background: #6184aa;
 	border-radius: 0px 0px 5px 5px;
-	vertical-align: central;
+	vertical-align: bottom;
 }
 footer div{
-	padding-top: 35px;
+	padding-top: 25px;
 	font-weight: bold;
 	padding-left: 10px;
 }
