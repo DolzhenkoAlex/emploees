@@ -4,6 +4,10 @@
 	Author     : Dolzhenko A.
 --%>
 
+<%@ page import="jakarta.servlet.*" %>
+<%@ page import="jakarta.servlet.http.*" %>
+
+
 <%@page language="java" contentType="text/html" 
 	 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,14 +18,14 @@
 		<title>Главная страница</title>
 	</head>
 	<body>
-		<jsp:include page="jspf/header.jsp" />
+		<jsp:include page="/WEB-INF/jspf/header.jsp" />
 		<div id="main">
 			<h2>Функции системы</h2>
 			<ul>
-				<li><a href="#">Сотрудники</a>
-				<li><a href="#">Должности</a>
+				<li><a href="/employees/views/persons.jsp">Сотрудники</a>
+				<li><a href="/employees/views/roles.jsp">Должности</a>
 			</ul>
 		</div>
-		<jsp:include page="jspf/footer.jsp" />
+		<jsp:include page="/WEB-INF/jspf/footer.jsp" />
 	</body>
 </html>
