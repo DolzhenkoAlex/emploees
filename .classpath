@@ -12,7 +12,14 @@
 			<attribute name="owner.project.facets" value="jst.web;#system#"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/dolje/Project_JavaEE/postgresql-42.5.4.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="D:/dolje/Project_JavaEE/postgresql-8.1-404.jdbc2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/PostgreSQL JDBC Driver"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
