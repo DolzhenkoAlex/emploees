@@ -1,14 +1,11 @@
 package dao;
 
-import domain.Role;
-
-import java.util.List;
-
 import domain.Person;
 import exception.RoleException;
+import java.util.List;
 
 /**
- * Интерфейс для определения функций хранлища данных о сотрудниках
+ * Интерфейс для определения функций хранилища данных о сотрудниках
  */
 
 public interface PersonsDAO {

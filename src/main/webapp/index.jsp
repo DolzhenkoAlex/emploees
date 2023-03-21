@@ -4,9 +4,6 @@
 	Author     : Dolzhenko A.
 --%>
 
-<%@ page import="jakarta.servlet.*" %>
-<%@ page import="jakarta.servlet.http.*" %>
-
 
 <%@page language="java" contentType="text/html" 
 	 pageEncoding="UTF-8"%>
