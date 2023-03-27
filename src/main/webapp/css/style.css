@@ -49,11 +49,13 @@ footer span{
 #main .leftAside{
 	float: left;
 	position: relative;
-	width: 550px;
+	width: 650px;
 	background: #ccccff;
 	border-radius: 5px;
 	height: 100%;
 }
+
+
 #main .leftAside p{
 	width: 96%;
 	margin-left: 2%;
@@ -69,22 +71,17 @@ footer span{
 	background: #76a5fc;
 	text-align: center;
 }
-#main .leftAside ul{
-	margin: 0px;
-	margin-left: 2%;
-	margin-bottom: 2%;
-	padding: 0px;
-	width: 96%;
-	list-style: none;
-}
+
 #main article{
-	margin-left: 560px;
+	margin-left: 660px;
 	margin-bottom: 5px;
 	background: #80abdb;
 	border: 1px solid #40658d;
 	border-radius: 5px;
 } 
-#main article h2{
+
+
+#main article h3{
 	font-size: 2em;
 	padding: 3px 5px;
 	margin: 0px;

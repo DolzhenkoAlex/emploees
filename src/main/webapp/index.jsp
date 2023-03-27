@@ -19,9 +19,6 @@
 		<div id="main">
 			<h2>Функции системы</h2>
 			<ul>
-				<%-- 
-				<li><a href="/employees/views/persons.jsp">Сотрудники</a>
-				--%>
 				<li><a href="/employees/persons">Сотрудники</a>
 				<li><a href="/employees/roles">Должности</a>
 			</ul>

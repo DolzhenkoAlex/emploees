@@ -1,7 +1,5 @@
 package domain;
 
-import domain.Role;
-
 /**
  *   Класс для хранения данных сотрудника
  */
@@ -77,6 +75,10 @@ public class Person {
 	public Long getId() {
 		return id;
 	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getEmail() {
 		return email;
@@ -88,6 +90,10 @@ public class Person {
 
 	public String getRole() {
 		return role.getNamerole();
+	}
+	
+	public void setRole(Role role) {
+		this.role = role;
 	}
 		
 	@Override

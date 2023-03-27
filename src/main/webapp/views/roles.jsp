@@ -19,12 +19,25 @@
 		<jsp:include page="/WEB-INF/jspf/header.jsp" />
 		<div id="main">
 			<aside class="leftAside">
-				<h2>Список должностей</h2>
-				<ul>
-					<li><a>директор</a></li>
-					<li><a>бухгалтер</a></li>
-					<li><a>менеджер</a></li>
-				</ul>
+				<h3>Список должностей</h3>
+				<table>
+					<tr>
+						<th>Id</th>
+						<th>Должность</th>
+					</tr>
+					<tr>
+						<td align="center">1</td>
+						<td align="center">директор</td>
+					</tr>
+					<tr>
+						<td align="center">2</td>
+						<td align="center">бухгалтер</td>
+					</tr>
+					<tr>
+						<td align="center">3</td>
+						<td align="center">менеджер</td>
+					</tr>
+				</table>
 			</aside>
 			<section>
 				<article>
@@ -37,7 +50,7 @@
 						</p>
 						</form>
 						<p>
-							<button type="submit">Отправить</button>
+							<button type="submit">Добавить</button>
 						</p>		
 					</div>
 				</article>
