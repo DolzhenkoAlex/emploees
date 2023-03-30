@@ -82,10 +82,14 @@ footer span{
 
 
 #main article h3{
-	font-size: 2em;
-	padding: 3px 5px;
 	margin: 0px;
+	margin-left: 2%;
+	margin-top: 2%;
+	width: 96%;
+	padding: 5px 0px 5px 0px;
 	border-radius: 5px 5px 0px 0px; 
+	background: #76a5fc;
+	text-align: left;
 }
 #main article .text-article{
 	padding: 5px;
