@@ -6,6 +6,7 @@
 body {
 	width: 96%;
 	margin-left: 2%;
+	height: 130px;
 }
 header{
 	height: 150px;
@@ -43,6 +44,7 @@ footer div{
 footer span{
 	margin-right: 15px;
 }
+
 #main{
 	margin-top: 3px;
 }
@@ -70,6 +72,19 @@ footer span{
 	border-radius: 5px 5px 0px 0px; 
 	background: #76a5fc;
 	text-align: center;
+}
+
+#main .leftAside table{
+	margin: 5px;
+	margin-left: 2%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	width: 96%;
+	padding: 5px 0px 5px 0px;
+	border-radius: 0px 0px 5px 5px; 
+	background: #76a5fc;
+	text-align: center;
+	border: 1px solid #333;
 }
 
 #main article{
@@ -110,7 +125,13 @@ footer span{
     float: right;
     margin-left: 10px;
 }
-#main .leftAside table {
-	width: 500px;
+
+#main .leftAside table tr td {
+	text-align: center;
 }
 
+
+thead {
+    background-color: #3f87a6;
+    color: #fff;
+}
