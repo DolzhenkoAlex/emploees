@@ -6,6 +6,27 @@
 
 <%@ page language="java" contentType="text/html" 
     pageEncoding="UTF-8"%>
+    
+<%@ page import="domain.Person"%>
+<%@ page import="domain.Role"%>
+
+<%
+Role r1 = new Role(1l, "директор");
+Role r2 = new Role(2l, "бухгалтер");
+Role r3= new Role(3l, "менеджер");
+Role r4 = new Role(4l, "маркетолог");
+Role[] roles = new Role[]{r1, r2, r3, r4};
+int lengthRole = roles.length;
+
+Person p1 = new Person(1l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-55-24", r1);
+Person p2 = new Person(2l, "Петр","Петров", "petrov@mail.ru", "+7 (961)-289-44-39", r2);
+Person p3= new Person(3l, "Сидор","Сидоров", "sidorov@mail.ru", "+7 (961)-289-33-57", r3);
+Person p4 = new Person(4l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-44-39", r4);
+Person[] persons = new Person[]{p1, p2, p3, p4};
+int length = persons.length;
+%>
+
+    
 <!DOCTYPE html>
 <html>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -21,38 +42,30 @@
 			<aside class="leftAside">
 				<h3>Список сотрудников</h3>
 				<table>
+				<thead>
 					<tr>
-						<th>Id</th>
+						<th>Код</th>
 						<th>Фамилия</th>
 						<th>Имя</th>
 						<th>Должность</th>
 						<th>Телефон</th>
 						<th>Эл. почта</th>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>Иванов</td>
-						<td>Иван</td>
-						<td>директор</td>
-						<td width="150">+7 (961)-289-55-24</td>
-						<td>ivanov@mail.ru</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Петров</td>
-						<td>Петр</td>
-						<td>бухгалтер</td>
-						<td>+7 (961)-289-44-39</td>
-						<td>petrov@mail.ru</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Сидоров</td>
-						<td>Сидор</td>
-						<td>менеджер</td>
-						<td>+7 (961)-289-33-57</td>
-						<td>sidorov@mail.ru</td>
-					</tr>
+				</thead>
+				<tbody>
+					<%
+						for (int i = 0; i < length; i++) {
+							out.println("<tr>"
+							                     +"<td >"+persons[i].getId()+"</td>" 
+							                     +"<td >"+persons[i].getLastName()+"</td>"
+							                     +"<td >"+persons[i].getFirstName()+"</td>"
+							                     +"<td >"+persons[i].getRole()+"</td>"
+							                     +"<td >"+persons[i].getPhone()+"</td>"
+							                     +"<td >"+persons[i].getEmail()+"</td>"
+										 + "</tr>");
+						}
+					%>
+				</tbody>
 				</table>
 			</aside>
 			<section>
@@ -70,8 +83,17 @@
 						</p>
 						<p>
 							<label for="rolename">Должность</label>
-							<input type="text" name="rolename" />
-						</p>
+							<select>
+								<option disabled>Выберите должность</option>
+								
+								<%
+									for (int i = 0; i < lengthRole; i++) {
+										out.println("<option value='"+roles[i].getNamerole()+"'>"
+							             + roles[i].getNamerole() 
+										 + "</option>");
+									} 
+								%>
+							</select>
 						<p>
 							<label for="phone">Телефон</label>
 							<input type="text" name="phone" />

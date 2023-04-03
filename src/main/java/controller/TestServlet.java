@@ -42,6 +42,7 @@ public class TestServlet extends HttpServlet {
 		String url = "jdbc:postgresql://localhost:5433/persons";
 		String username = "postgres";
 		String password = "rinh2021";
+		
 		try {
 			Class.forName("org.postgresql.Driver");
 			System.out.println("Driver connected");
@@ -49,13 +50,13 @@ public class TestServlet extends HttpServlet {
 
 				writer.println("Connection to persons succesfull!");
 				Statement stmt = conn.createStatement();
-				ResultSet rs =  stmt.executeQuery("SELECT * FROM roles");
+				ResultSet rs = stmt.executeQuery("SELECT * FROM roles");
 				while (rs.next()) {
-                    String str = rs.getString("id") + ":  " + rs.getString(2);
-                    writer.println("Должность:  " + str);
-                }
-                rs.close();
-   			}
+					String str = rs.getString("id") + ":  " + rs.getString(2);
+					writer.println("Должность:  " + str);
+				}
+				rs.close();
+			}
 		} catch (Exception ex) {
 			writer.println("Connection failed...");
 			writer.println(ex);
