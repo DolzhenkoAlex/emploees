@@ -15,6 +15,8 @@ Role r1 = new Role(1l, "директор");
 Role r2 = new Role(2l, "бухгалтер");
 Role r3= new Role(3l, "менеджер");
 Role r4 = new Role(4l, "маркетолог");
+Role[] roles = new Role[]{r1, r2, r3, r4};
+int lengthRole = roles.length;
 
 Person p1 = new Person(1l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-55-24", r1);
 Person p2 = new Person(2l, "Петр","Петров", "petrov@mail.ru", "+7 (961)-289-44-39", r2);
@@ -83,10 +85,14 @@ int length = persons.length;
 							<label for="rolename">Должность</label>
 							<select>
 								<option disabled>Выберите должность</option>
-							    <option value="директор">директор</option>
-							    <option value="бухгалтер">бухгалтер</option>
-							    <option value="менеджер">менеджер</option>
-							    <option value="менеджер">маркетолог</option>
+								
+								<%
+									for (int i = 0; i < lengthRole; i++) {
+										out.println("<option value='"+roles[i].getNamerole()+"'>"
+							             + roles[i].getNamerole() 
+										 + "</option>");
+									} 
+								%>
 							</select>
 						<p>
 							<label for="phone">Телефон</label>
