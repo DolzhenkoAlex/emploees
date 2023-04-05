@@ -36,15 +36,13 @@ public class TestServlet extends HttpServlet {
 	ConnectionProperty prop;
 	String url, username, password;
 	String[] props;
+	String select_all = "SELECT * FROM roles";
        
     public TestServlet() {
         super();
         // TODO Auto-generated constructor stub
         prop = new ConnectionProperty();
     	props = prop.GetConProperties();
-    	url = props[1];
-    	username = props[2];
-    	password = props[3];
     }
 
 	/**
@@ -54,17 +52,15 @@ public class TestServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: test").append(request.getContextPath());
-
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
 
 		try {
 			Class.forName(props[0]);
-
-			try (Connection conn = DriverManager.getConnection(url, username, password)) {
+			try (Connection conn = DriverManager.getConnection(props[1], props[2], props[3])) {
 				System.out.println("Connection to persons succesfull!");
 				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM roles");
+				ResultSet rs = stmt.executeQuery(select_all);
 				while (rs.next()) {
 					String str = rs.getString("id") + ":  " + rs.getString(2);
 					writer.println("Должность:  " + str);

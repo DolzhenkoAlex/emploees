@@ -17,7 +17,7 @@ public class ModelRoles {
     }
 	
 	private ModelRoles() {
-		modelRole = new ArrayList<>();
+		modelRole = new ArrayList<Role>();
     }
 	
 	public void addRole(Role role) {

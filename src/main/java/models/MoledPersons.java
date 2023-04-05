@@ -17,7 +17,7 @@ public class MoledPersons {
 	}
 
 	private MoledPersons() {
-		modelPersons = new ArrayList<>();
+		modelPersons = new ArrayList<Person>();
     }
 
 	public void addPerson(Person person) {
