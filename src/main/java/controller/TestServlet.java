@@ -7,11 +7,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.sql.Statement;
+import java.util.Properties;
+
+import business.RoleManager;
+import config.ConfigDb;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import dao.ConnectionBuilderFactory;
+import dao.ConnectionProperty;
+import dao.SimpleConnectionBuilder;
+import dao.ConnectionBuilder;
 
 /**
  * Servlet implementation class TestServlet
@@ -19,13 +32,19 @@ import java.sql.ResultSet;
 @WebServlet("/test")
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	ConnectionProperty prop;
+	String url, username, password;
+	String[] props;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public TestServlet() {
         super();
         // TODO Auto-generated constructor stub
+        prop = new ConnectionProperty();
+    	props = prop.GetConProperties();
+    	url = props[1];
+    	username = props[2];
+    	password = props[3];
     }
 
 	/**
@@ -38,17 +57,12 @@ public class TestServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
-		
-		String url = "jdbc:postgresql://localhost:5433/persons";
-		String username = "postgres";
-		String password = "rinh2021";
-		
-		try {
-			Class.forName("org.postgresql.Driver");
-			System.out.println("Driver connected");
-			try (Connection conn = DriverManager.getConnection(url, username, password)) {
 
-				writer.println("Connection to persons succesfull!");
+		try {
+			Class.forName(props[0]);
+
+			try (Connection conn = DriverManager.getConnection(url, username, password)) {
+				System.out.println("Connection to persons succesfull!");
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM roles");
 				while (rs.next()) {
@@ -56,14 +70,14 @@ public class TestServlet extends HttpServlet {
 					writer.println("Должность:  " + str);
 				}
 				rs.close();
+			} catch (Exception e) {
+				System.out.println(e);
 			}
 		} catch (Exception ex) {
-			writer.println("Connection failed...");
-			writer.println(ex);
+			System.out.println(ex);
 		} finally {
 			writer.close();
 		}
-
 	}
 
 	/**

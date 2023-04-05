@@ -9,7 +9,7 @@ import exception.RoleBusinessException;
 import exception.RoleDAOException;
 
 public class RoleManager {
-	// TODO Auto-generated constructor stub
+	
 	private final RoleDAO dao;
 	
 	public RoleManager () {

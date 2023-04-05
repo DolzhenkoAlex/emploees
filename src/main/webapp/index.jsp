@@ -18,11 +18,13 @@
 		<jsp:include page="/WEB-INF/jspf/header.jsp" />
 		<div id="main">
 			<h2>Функции системы</h2>
-			<ul>
-				<li><a href="/employees/persons">Сотрудники</a>
-				<li><a href="/employees/roles">Должности</a>
-			</ul>
-		</div>
+			<nav>
+				<ul>
+					<li><a href="/employees/persons">Сотрудники</a>
+					<li><a href="/employees/roles">Должности</a>
+				</ul>
+			</nav>
+	</div>
 		<jsp:include page="/WEB-INF/jspf/footer.jsp" />
 	</body>
 </html>

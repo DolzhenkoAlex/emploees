@@ -1,7 +1,7 @@
 package domain;
 
 /**
- *   Класс для хранения данных сотрудника
+ *   Класс для данных сотрудника
  */
 public class Person {
 	
@@ -20,13 +20,17 @@ public class Person {
     // email
     private String email;
     
-    // Должность
-	private Role role;
+    // Внешний ключ -ссылка на сущность Role
+    private Long idRole;
+    
+    // Навигационное свойства - ссылка на должность
+    private Role role;
 
     public Person() {
 	}
     
-    public Person(String firstName, String lastName, String phone,  String email, Role role) {
+    public Person(String firstName, String lastName, String phone,  
+    		String email, Role role) {
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.email = email;
@@ -34,13 +38,25 @@ public class Person {
     	this.role = role;
     }
     
-    public Person(Long id, String firstName, String lastName, String phone,  String email, Role role) {
+    public Person(String firstName, String lastName, String phone,  
+    		String email, Long idRole, Role role) {
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.email = email;
+    	this.phone = phone;
+    	this.role = role;
+    	this.idRole = idRole;
+    }
+    
+    public Person(Long id, String firstName, String lastName, String phone,  
+    		String email, Long idRole, Role role) {
     	this.id = id;
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.email = email;
     	this.phone = phone;
     	this.role = role;
+    	this.idRole = idRole;
     }
     
         
@@ -95,6 +111,14 @@ public class Person {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	public Long getIdRole() {
+		return idRole;
+	}
+
+	public void setIdRole(Long idRole) {
+		this.idRole = idRole;
+	}
 		
 	@Override
 	public String toString() {
@@ -106,4 +130,5 @@ public class Person {
 				", namerole = " + getRole() + 
 				"}";
 	}
+
 }

@@ -1,6 +1,6 @@
 package dao;
 
-// класс-фабрика 
+// класс-фабрика соединения с базой данных
 public class ConnectionBuilderFactory {
 	// TODO Auto-generated constructor stub
 	public static ConnectionBuilder getConnectionBuilder() {

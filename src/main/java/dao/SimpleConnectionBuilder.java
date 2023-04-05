@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import config.GlobalConfig;
+import config.ConfigDb;
 
 // Реализация интерфейса ConnectionBuilder
 public class SimpleConnectionBuilder implements ConnectionBuilder{
 
 	public SimpleConnectionBuilder() {
 		try {
-            Class.forName(GlobalConfig.getProperty("db.driver.class"));
+            Class.forName(ConfigDb.getProperty("db.driver.class"));
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -19,11 +19,18 @@ public class SimpleConnectionBuilder implements ConnectionBuilder{
 	}
 
 	@Override
-	public Connection getConnection() throws SQLException {
-		String url = GlobalConfig.getProperty("db.url");
-        String login = GlobalConfig.getProperty("db.login");
-        String password = GlobalConfig.getProperty("db.password");
-        return DriverManager.getConnection(url, login, password);
+	public Connection getConnection() throws SQLException{
+		String url = ConfigDb.getProperty("db.url");
+		String login = ConfigDb.getProperty("db.login");
+		String password = ConfigDb.getProperty("db.password");
+		return DriverManager.getConnection(url, login, password);
+	}
+	
+	public String[] getStrCon() {
+		String url = ConfigDb.getProperty("db.url");
+		String login = ConfigDb.getProperty("db.login");
+		String password = ConfigDb.getProperty("db.password");
+		return new String[] {url, login, password} ;
 	}
 
 }

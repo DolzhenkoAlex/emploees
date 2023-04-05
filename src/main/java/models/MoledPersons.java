@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//import javax.management.relation.Person;
-
 import domain.Person;
 
 public class MoledPersons {
@@ -22,7 +20,7 @@ public class MoledPersons {
 		modelPersons = new ArrayList<>();
     }
 
-	public void addRole(Person person) {
+	public void addPerson(Person person) {
 		modelPersons.add(person);
 	}
 
