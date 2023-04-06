@@ -42,7 +42,6 @@ public class TestServlet extends HttpServlet {
        
     public TestServlet() throws FileNotFoundException, IOException {
         super();
-        // TODO Auto-generated constructor stub
         prop = new ConnectionProperty();
     	props = prop.GetConProperties();
     }

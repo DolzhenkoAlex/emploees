@@ -41,7 +41,7 @@ int length = roles.length;
 				</thead>
 				<tbody>
 					<%
-						for (int i = 0; i < length; i++) {
+						for (int i = 0; i <length; i++) {
 							out.println("<tr>"
 							                     +"<td >"+roles[i].getId()+"</td>" 
 							                     +"<td >" + roles[i].getNamerole() + "</td>" 
