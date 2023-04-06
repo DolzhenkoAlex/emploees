@@ -1,26 +1,29 @@
 package dao;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
 
 public class ConnectionProperty {
 	
-	private Properties pr = new Properties();;
+	public static final String CONFIG_NAME = "config.properties";
+	public static final Properties GLOBAL_COFIG = new Properties();
 	
+	public ConnectionProperty() throws FileNotFoundException, IOException {
+		GLOBAL_COFIG.load(new FileReader(CONFIG_NAME));
+	}
+
+	// Получить значение параметра из конфигурации по имени свойства
+	public static String getProperty(String property) {
+		return GLOBAL_COFIG.getProperty(property);
+	}
 	
 	public String[] GetConProperties() {
-		
-		try {
-			// Загружаем данные из файла  /config.properties
-			pr.load(new FileReader("config.properties"));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
-		String url = pr.getProperty("db.url");
-		String login = pr.getProperty("db.login");
-		String password = pr.getProperty("db.password");
-		String driver = pr.getProperty("db.driver.class");
+		String url = ConnectionProperty.getProperty("db.url");
+		String login = ConnectionProperty.getProperty("db.login");
+		String password = ConnectionProperty.getProperty("db.password");
+		String driver = ConnectionProperty.getProperty("db.driver.class");
 		return new String[] {driver, url, login, password} ;
 	}
 }

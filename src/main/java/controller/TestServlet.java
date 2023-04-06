@@ -14,6 +14,7 @@ import config.ConfigDb;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +24,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import dao.ConnectionBuilderFactory;
 import dao.ConnectionProperty;
+import dao.EmpConnBuilder;
 import dao.SimpleConnectionBuilder;
 import dao.ConnectionBuilder;
 
@@ -38,7 +40,7 @@ public class TestServlet extends HttpServlet {
 	String[] props;
 	String select_all = "SELECT * FROM roles";
        
-    public TestServlet() {
+    public TestServlet() throws FileNotFoundException, IOException {
         super();
         // TODO Auto-generated constructor stub
         prop = new ConnectionProperty();
@@ -50,31 +52,26 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: test").append(request.getContextPath());
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
+		EmpConnBuilder builder = new EmpConnBuilder();
 
-		try {
-			Class.forName(props[0]);
-			try (Connection conn = DriverManager.getConnection(props[1], props[2], props[3])) {
-				System.out.println("Connection to persons succesfull!");
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(select_all);
-				while (rs.next()) {
-					String str = rs.getString("id") + ":  " + rs.getString(2);
-					writer.println("Должность:  " + str);
-				}
-				rs.close();
-			} catch (Exception e) {
-				System.out.println(e);
+		try (Connection conn = builder.getConnection()) {
+			System.out.println("Connection to persons succesfull!");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(select_all);
+			while (rs.next()) {
+				String str = rs.getString("id") + ":  " + rs.getString(2);
+				writer.println("Должность:  " + str);
 			}
-		} catch (Exception ex) {
-			System.out.println(ex);
+			rs.close();
+		} catch (Exception e) {
+			System.out.println(e);
 		} finally {
 			writer.close();
 		}
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

@@ -19,10 +19,10 @@ Role r4 = new Role(4l, "маркетолог");
 Role[] roles = new Role[]{r1, r2, r3, r4};
 int lengthRole = roles.length;
 
-Person p1 = new Person(1l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-55-24", r1);
-Person p2 = new Person(2l, "Петр","Петров", "petrov@mail.ru", "+7 (961)-289-44-39", r2);
-Person p3= new Person(3l, "Сидор","Сидоров", "sidorov@mail.ru", "+7 (961)-289-33-57", r3);
-Person p4 = new Person(4l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-44-39", r4);
+Person p1 = new Person(1l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-55-24",1l, r1);
+Person p2 = new Person(2l, "Петр","Петров", "petrov@mail.ru", "+7 (961)-289-44-39",2l, r2);
+Person p3= new Person(3l, "Сидор","Сидоров", "sidorov@mail.ru", "+7 (961)-289-33-57",3l, r3);
+Person p4 = new Person(4l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-44-39",4l, r4);
 Person[] persons = new Person[]{p1, p2, p3, p4};
 int length = persons.length;
 %>
