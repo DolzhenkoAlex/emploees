@@ -7,6 +7,8 @@
 <%@ page language="java" contentType="text/html" 
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+    
     
 <%@ page import="domain.Person"%>
 <%@ page import="domain.Role"%>
@@ -25,6 +27,7 @@ Person p3= new Person(3l, "Сидор","Сидоров", "sidorov@mail.ru", "+7 
 Person p4 = new Person(4l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-44-39",4l, r4);
 Person[] persons = new Person[]{p1, p2, p3, p4};
 int length = persons.length;
+pageContext.setAttribute("persons", persons);
 %>
 
     
@@ -54,18 +57,16 @@ int length = persons.length;
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						for (int i = 0; i < length; i++) {
-							out.println("<tr>"
-							                     +"<td >"+persons[i].getId()+"</td>" 
-							                     +"<td >"+persons[i].getLastName()+"</td>"
-							                     +"<td >"+persons[i].getFirstName()+"</td>"
-							                     +"<td >"+persons[i].getRole()+"</td>"
-							                     +"<td >"+persons[i].getPhone()+"</td>"
-							                     +"<td >"+persons[i].getEmail()+"</td>"
-										 + "</tr>");
-						}
-					%>
+					<c:forEach var="person" items="${persons}">
+							<tr>
+								<td><c:out value="${person.getId()}"></c:out> </td>
+								<td><c:out value="${person.getLastName()}"></c:out> </td>
+								<td><c:out value="${person.getFirstName()}"></c:out> </td>
+								<td><c:out value="${person.getRole()}"></c:out> </td>
+								<td><c:out value="${person.getPhone()}"></c:out> </td>
+								<td><c:out value="${person.getEmail()}"></c:out> </td>
+							</tr>
+						</c:forEach>
 				</tbody>
 				</table>
 			</aside>
