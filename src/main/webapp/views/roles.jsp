@@ -5,16 +5,25 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ 
+<%--
+	Внимание это подключение JSLT для jakarta
+    используется вместо
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+--%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%@ page import="domain.Role"%>
+<%@ page import="controller.RoleServlet"%>
 
-<%
+<% 
 Role r1 = new Role(1l, "директор");
 Role r2 = new Role(2l, "бухгалтер");
 Role r3= new Role(3l, "менеджер");
 Role r4 = new Role(4l, "маркетолог");
 Role[] roles = new Role[]{r1, r2, r3, r4};
 int length = roles.length;
+pageContext.setAttribute("roles", roles);
 %>
 
 <!DOCTYPE html>
@@ -32,25 +41,24 @@ int length = roles.length;
 		<section>
 		<aside class="leftAside">
 			<h3>Список должностей</h3>
-			<table>
-				<thead>
-					<tr>
-						<th scope="col">Код</th>
-						<th scope="col">Должность</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						for (int i = 0; i <length; i++) {
-							out.println("<tr>"
-							                     +"<td >"+roles[i].getId()+"</td>" 
-							                     +"<td >" + roles[i].getNamerole() + "</td>" 
-										 + "</tr>");
-						}
-					%>
-				</tbody>
-			</table>
-		</aside>
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Код</th>
+							<th scope="col">Должность</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<c:forEach var="role" items="${roles}">
+							<tr>
+								<td><c:out value="${role.getId()}"></c:out> </td>
+								<td><c:out value="${role.getNamerole()}"></c:out> </td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</aside>
 		</section>
 		<section>
 			<article>
