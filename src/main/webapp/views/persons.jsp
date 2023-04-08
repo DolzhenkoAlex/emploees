@@ -20,6 +20,7 @@ Role r3= new Role(3l, "менеджер");
 Role r4 = new Role(4l, "маркетолог");
 Role[] roles = new Role[]{r1, r2, r3, r4};
 int lengthRole = roles.length;
+pageContext.setAttribute("roles", roles);
 
 Person p1 = new Person(1l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-55-24",1l, r1);
 Person p2 = new Person(2l, "Петр","Петров", "petrov@mail.ru", "+7 (961)-289-44-39",2l, r2);
@@ -66,7 +67,7 @@ pageContext.setAttribute("persons", persons);
 								<td><c:out value="${person.getPhone()}"></c:out> </td>
 								<td><c:out value="${person.getEmail()}"></c:out> </td>
 							</tr>
-						</c:forEach>
+					</c:forEach>
 				</tbody>
 				</table>
 			</aside>
@@ -87,14 +88,11 @@ pageContext.setAttribute("persons", persons);
 							<label for="rolename">Должность</label>
 							<select>
 								<option disabled>Выберите должность</option>
-								
-								<%
-									for (int i = 0; i < lengthRole; i++) {
-										out.println("<option value='"+roles[i].getNamerole()+"'>"
-							             + roles[i].getNamerole() 
-										 + "</option>");
-									} 
-								%>
+								<c:forEach var="role" items="${roles}">
+									<option value="${role}">
+										<c:out value="${role.getNamerole()}"></c:out> 
+									</option>
+								</c:forEach>
 							</select>
 						<p>
 							<label for="phone">Телефон</label>
