@@ -60,12 +60,12 @@ pageContext.setAttribute("persons", persons);
 				<tbody>
 					<c:forEach var="person" items="${persons}">
 							<tr>
-								<td><c:out value="${person.getId()}"></c:out> </td>
-								<td><c:out value="${person.getLastName()}"></c:out> </td>
-								<td><c:out value="${person.getFirstName()}"></c:out> </td>
-								<td><c:out value="${person.getRole()}"></c:out> </td>
-								<td><c:out value="${person.getPhone()}"></c:out> </td>
-								<td><c:out value="${person.getEmail()}"></c:out> </td>
+								<td>${person.getId()}</td>
+								<td>${person.getLastName()}</td>
+								<td>${person.getFirstName()}</td>
+								<td>${person.getRole()}</td>
+								<td>${person.getPhone()}</td>
+								<td>${person.getEmail()}</td>
 							</tr>
 					</c:forEach>
 				</tbody>

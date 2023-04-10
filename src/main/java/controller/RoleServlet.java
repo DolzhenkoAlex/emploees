@@ -2,22 +2,20 @@ package controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
-import dao.ConnectionProperty;
-import dao.EmpConnBuilder;
-import domain.Role;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import dao.ConnectionProperty;
+import dao.EmpConnBuilder;
+import domain.Role;
 
 /**
  * Servlet implementation class RoleServlet
@@ -29,45 +27,35 @@ public class RoleServlet extends HttpServlet {
 	ConnectionProperty prop;
 	String select_all = "SELECT * FROM roles";
 	ArrayList<Role> roles = new ArrayList<Role>();
-	Role[] arrayroles;
+	String userPath;
 	
     public RoleServlet() throws FileNotFoundException, IOException {
     	prop = new ConnectionProperty();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		response.setContentType("text/html");
 		
-		//response.setContentType("text/html");
-		
-		//PrintWriter writer = response.getWriter();
-		//EmpConnBuilder builder = new EmpConnBuilder();
-		//Role role;
+		EmpConnBuilder builder = new EmpConnBuilder();
 
-		//try (Connection conn = builder.getConnection()) {
-			//System.out.println("Connection to persons succesfull!");
-			//Statement stmt = conn.createStatement();
-			//ResultSet rs = stmt.executeQuery(select_all);
-			//while (rs.next()) {
-				//roles.add(new Role(rs.getLong("id"), rs.getString("namerole")));
+		try (Connection conn = builder.getConnection()) {
+			System.out.println("Connection to role succesfull!");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(select_all);
+			roles.clear();
+			while (rs.next()) {
+				roles.add(new Role(rs.getLong("id"), rs.getString(2)));
+			}
+			rs.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		} 
 		
-				//String str = rs.getString("id") + ":  " + rs.getString(2);
-				//writer.println("Должность:  " + str);
-			//}
-			//rs.close();
-			//arrayroles = (Role[])roles.toArray();
-		//} catch (Exception e) {
-			//System.out.println(e);
-		//} finally {
-			//writer.close();
-		//}
-		
-		//ServletContext selvletContext = getServletContext();
-        //selvletContext.setAttribute("roles", arrayroles);
-		
-		String userPath = request.getServletPath();
+		System.out.println("Load role succesfull!");
+		request.setAttribute("roles", roles);
+	
+		userPath = request.getServletPath();
 		if("/roles".equals(userPath)){
 			request.getRequestDispatcher("/views/roles.jsp").forward(request, response);
 		}
@@ -80,5 +68,4 @@ public class RoleServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

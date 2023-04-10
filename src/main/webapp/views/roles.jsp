@@ -9,22 +9,11 @@
 <%--
 	Внимание это подключение JSLT для jakarta
     используется вместо
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    используется  <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 --%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
 <%@ page import="domain.Role"%>
-<%@ page import="controller.RoleServlet"%>
-
-<% 
-Role r1 = new Role(1l, "директор");
-Role r2 = new Role(2l, "бухгалтер");
-Role r3= new Role(3l, "менеджер");
-Role r4 = new Role(4l, "маркетолог");
-Role[] roles = new Role[]{r1, r2, r3, r4};
-int length = roles.length;
-pageContext.setAttribute("roles", roles);
-%>
 
 <!DOCTYPE html>
 <html>
@@ -48,12 +37,11 @@ pageContext.setAttribute("roles", roles);
 							<th scope="col">Должность</th>
 						</tr>
 					</thead>
-
 					<tbody>
 						<c:forEach var="role" items="${roles}">
 							<tr>
-								<td><c:out value="${role.getId()}"></c:out> </td>
-								<td><c:out value="${role.getNamerole()}"></c:out> </td>
+								<td>${role.getId()}</td>
+								<td>${role.getNamerole()}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -71,6 +59,9 @@ pageContext.setAttribute("roles", roles);
 						</p>
 					</form>
 					<p>
+						<br>
+						<br>
+						<br>
 						<button type="submit">Добавить</button>
 					</p>
 				</div>
