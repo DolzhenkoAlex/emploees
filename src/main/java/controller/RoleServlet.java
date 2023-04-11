@@ -25,13 +25,14 @@ public class RoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	ConnectionProperty prop;
-	String select_all = "SELECT * FROM roles";
+	String select_all_role = "SELECT id, rolename FROM roles";
 	ArrayList<Role> roles = new ArrayList<Role>();
 	String userPath;
 	
     public RoleServlet() throws FileNotFoundException, IOException {
     	prop = new ConnectionProperty();
     }
+    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -39,13 +40,14 @@ public class RoleServlet extends HttpServlet {
 		
 		EmpConnBuilder builder = new EmpConnBuilder();
 
+		// Загрузка всех должностей
 		try (Connection conn = builder.getConnection()) {
 			System.out.println("Connection to role succesfull!");
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(select_all);
+			ResultSet rs = stmt.executeQuery(select_all_role);
 			roles.clear();
 			while (rs.next()) {
-				roles.add(new Role(rs.getLong("id"), rs.getString(2)));
+				roles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
 			}
 			rs.close();
 		} catch (Exception e) {

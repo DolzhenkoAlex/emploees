@@ -9,27 +9,8 @@
     
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
     
-    
 <%@ page import="domain.Person"%>
 <%@ page import="domain.Role"%>
-
-<%
-Role r1 = new Role(1l, "директор");
-Role r2 = new Role(2l, "бухгалтер");
-Role r3= new Role(3l, "менеджер");
-Role r4 = new Role(4l, "маркетолог");
-Role[] roles = new Role[]{r1, r2, r3, r4};
-int lengthRole = roles.length;
-pageContext.setAttribute("roles", roles);
-
-Person p1 = new Person(1l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-55-24",1l, r1);
-Person p2 = new Person(2l, "Петр","Петров", "petrov@mail.ru", "+7 (961)-289-44-39",2l, r2);
-Person p3= new Person(3l, "Сидор","Сидоров", "sidorov@mail.ru", "+7 (961)-289-33-57",3l, r3);
-Person p4 = new Person(4l, "Иван","Иванов", "ivanov@mail.ru", "+7 (961)-289-44-39",4l, r4);
-Person[] persons = new Person[]{p1, p2, p3, p4};
-int length = persons.length;
-pageContext.setAttribute("persons", persons);
-%>
 
     
 <!DOCTYPE html>

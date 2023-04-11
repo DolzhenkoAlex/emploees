@@ -55,9 +55,21 @@ public class Person {
     	this.lastName = lastName;
     	this.email = email;
     	this.phone = phone;
+    	this.idRole = idRole;
     	this.role = role;
+    }
+    
+    public Person(Long id, String firstName, String lastName, String phone,  
+    		String email, Long idRole) {
+    	this.id = id;
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.email = email;
+    	this.phone = phone;
     	this.idRole = idRole;
     }
+    
+    
     
         
 	public String getFirstName() {
