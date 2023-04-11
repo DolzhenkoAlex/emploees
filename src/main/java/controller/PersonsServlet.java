@@ -67,14 +67,22 @@ public class PersonsServlet extends HttpServlet {
 			// Загрузка всех должностей
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(select_all_role);
-			roles.clear();
-			while (rs.next()) {
-				roles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
+			if(rs != null) {
+				roles.clear();
+				while (rs.next()) {
+					roles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
+					}
+				rs.close();
+				System.out.println("Load role succesfull!");
+				request.setAttribute("roles", roles);
+				}
+			else
+			{
+				System.out.println("Ошибка загрузки role");
 			}
-			rs.close();
 			
-			System.out.println("Load role succesfull!");
-			request.setAttribute("roles", roles);
+			
+			
 			
 			
 			// Загрузка всех сотрудников
@@ -96,6 +104,8 @@ public class PersonsServlet extends HttpServlet {
 								));
 				}
 				rs.close();
+				System.out.println("Load person succesfull!");
+				request.setAttribute("persons", persons);
 			}
 			else
 			{
@@ -104,9 +114,6 @@ public class PersonsServlet extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println(e);
 		} 
-		
-		System.out.println("Load person succesfull!");
-		request.setAttribute("persons", persons);
 
 		String userPath = request.getServletPath();
 		if("/persons".equals(userPath)){

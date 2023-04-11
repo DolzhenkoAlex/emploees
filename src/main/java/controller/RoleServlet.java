@@ -45,18 +45,25 @@ public class RoleServlet extends HttpServlet {
 			System.out.println("Connection to role succesfull!");
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(select_all_role);
-			roles.clear();
-			while (rs.next()) {
-				roles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
+			if(rs != null) {
+				roles.clear();
+				while (rs.next()) {
+					roles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
+				}
+				rs.close();
+				System.out.println("Load role succesfull!");
+				request.setAttribute("roles", roles);
 			}
-			rs.close();
+			else
+			{
+				System.out.println("Ошибка загрузки role");
+			}
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		} 
 		
-		System.out.println("Load role succesfull!");
-		request.setAttribute("roles", roles);
-	
+			
 		userPath = request.getServletPath();
 		if("/roles".equals(userPath)){
 			request.getRequestDispatcher("/views/roles.jsp").forward(request, response);

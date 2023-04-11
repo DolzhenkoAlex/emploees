@@ -19,11 +19,9 @@ public class EmpConnBuilder implements ConnectionBuilder{
 	// Получение соединения с базой данных
 	@Override
 	public Connection getConnection() throws SQLException {
-		// TODO Auto-generated method stub
 		String url = ConnectionProperty.getProperty("db.url");
 		String login = ConnectionProperty.getProperty("db.login");
 		String password = ConnectionProperty.getProperty("db.password");
 		return DriverManager.getConnection(url, login, password);
 	}
-
 }

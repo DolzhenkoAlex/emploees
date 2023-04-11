@@ -18,12 +18,4 @@ public class ConnectionProperty {
 	public static String getProperty(String property) {
 		return GLOBAL_COFIG.getProperty(property);
 	}
-	
-	public String[] GetConProperties() {
-		String url = ConnectionProperty.getProperty("db.url");
-		String login = ConnectionProperty.getProperty("db.login");
-		String password = ConnectionProperty.getProperty("db.password");
-		String driver = ConnectionProperty.getProperty("db.driver.class");
-		return new String[] {driver, url, login, password} ;
-	}
 }
