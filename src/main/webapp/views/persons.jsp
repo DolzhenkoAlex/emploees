@@ -67,7 +67,7 @@
 						</p>
 						<p>
 							<label for="rolename">Должность</label>
-							<select>
+							<select name = "role">
 								<option disabled>Выберите должность</option>
 								<c:forEach var="role" items="${roles}">
 									<option value="${role}">
@@ -83,10 +83,11 @@
 							<label for="email">Эл. почта </label>
 							<input type="text" name="email" />
 						</p>
-						</form>
 						<p>
 							<button type="submit">Добавить</button>
 						</p>
+						</form>
+						
 					</div>
 				</article>
 			</section> 

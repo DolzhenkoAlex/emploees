@@ -3,9 +3,12 @@ package controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.swing.text.html.HTMLEditorKit.Parser;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,13 +30,15 @@ public class PersonsServlet extends HttpServlet {
 	String select_all_person = "SELECT id, firstName, lastname, "
 			+ "email, phone, roleid FROM persons";
 	String select_all_role = "SELECT id, rolename FROM roles";
+	String insert_person = "INSERT INTO persons( roleid, firstname, lastname, phone, email)"
+			+ "VALUES(?,?,?,?,?)";
 	ArrayList<Role> roles = new ArrayList<Role>();
  	ArrayList<Person> persons = new ArrayList<Person>();
 	String userPath;
 
     /**
      * Default constructor. 
-     */
+     */ 
     public PersonsServlet() throws FileNotFoundException, IOException{
     	prop = new ConnectionProperty();
     }
@@ -126,6 +131,47 @@ public class PersonsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		EmpConnBuilder builder = new EmpConnBuilder();
+		
+		try (Connection conn = builder.getConnection()){
+			
+			System.out.println("Connection to newperson succesfull!");
+			
+			String firstName = request.getParameter("firstname");
+			String lastName = request.getParameter("lastname");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			
+			String role =  request.getParameter("role");
+			
+			int index1 = role.indexOf('='); 
+			int index2 = role.indexOf(","); 
+			String r1 = role.substring(index1+1, index2);
+			Long id = Long.parseLong(r1.trim());
+
+			System.out.println("!!!New person role = "+ role);
+			System.out.println("New person role = "+ r1+"   "+id);
+			
+			PreparedStatement preparedStatement = conn.prepareStatement(insert_person);
+			preparedStatement.setLong(1, id );
+			preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setString(4, phone);
+            preparedStatement.setString(5, email );
+            
+            int rows = preparedStatement.executeUpdate();
+            
+            System.out.printf("%d rows added", rows);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			
+			getServletContext().getRequestDispatcher("/views/persons.jsp")
+				.forward(request, response); 
+		}
+		
+		
+		
 		doGet(request, response);
 	}
 

@@ -80,11 +80,9 @@ public class RoleServlet extends HttpServlet {
 		EmpConnBuilder builder = new EmpConnBuilder();
 		
 		try (Connection conn = builder.getConnection()){
-			System.out.println("Connection to newrole succesfull!");
+			System.out.println("Connection to newperson succesfull!");
 			String name = request.getParameter("namerole");
-			
 			System.out.println("New role = "+ name);
-			
 			Role newRole = new Role(name);
 			int result;
 			
@@ -96,6 +94,7 @@ public class RoleServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+			
 			getServletContext().getRequestDispatcher("/views/roles.jsp")
 				.forward(request, response); 
 		}
