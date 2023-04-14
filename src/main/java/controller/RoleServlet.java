@@ -3,6 +3,7 @@ package controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class RoleServlet extends HttpServlet {
 	
 	ConnectionProperty prop;
 	String select_all_role = "SELECT id, rolename FROM roles";
+	String insert_role = "INSERT INTO roles(rolename) VALUES(?)";
 	ArrayList<Role> roles = new ArrayList<Role>();
 	String userPath;
 	
@@ -42,7 +44,7 @@ public class RoleServlet extends HttpServlet {
 
 		// Загрузка всех должностей
 		try (Connection conn = builder.getConnection()) {
-			System.out.println("Connection to role succesfull!");
+			System.out.println("Connection to newrole succesfull!");
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(select_all_role);
 			if(rs != null) {
@@ -51,7 +53,7 @@ public class RoleServlet extends HttpServlet {
 					roles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
 				}
 				rs.close();
-				System.out.println("Load role succesfull!");
+				System.out.println("Load newrole succesfull!");
 				request.setAttribute("roles", roles);
 			}
 			else
@@ -62,7 +64,6 @@ public class RoleServlet extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println(e);
 		} 
-		
 			
 		userPath = request.getServletPath();
 		if("/roles".equals(userPath)){
@@ -73,8 +74,31 @@ public class RoleServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		EmpConnBuilder builder = new EmpConnBuilder();
+		
+		try (Connection conn = builder.getConnection()){
+			System.out.println("Connection to newrole succesfull!");
+			String name = request.getParameter("namerole");
+			
+			System.out.println("New role = "+ name);
+			
+			Role newRole = new Role(name);
+			int result;
+			
+			try (PreparedStatement preparedStatement = conn.prepareStatement(insert_role)){
+				preparedStatement.setString(1, newRole.getNamerole());
+				result = preparedStatement.executeUpdate();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			getServletContext().getRequestDispatcher("/views/roles.jsp")
+				.forward(request, response); 
+		}
 		doGet(request, response);
 	}
 }

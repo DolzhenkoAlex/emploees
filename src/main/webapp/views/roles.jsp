@@ -54,16 +54,17 @@
 				<div class="text-article">
 					<form method="POST" action="">
 						<p>
-							<label for="namerole">Должность</label> <input type="text"
-								name="namerole" />
+							<label for="namerole">Должность</label> 
+							<input type="text" name="namerole" />
 						</p>
-					</form>
+					
 					<p>
 						<br>
 						<br>
 						<br>
 						<button type="submit">Добавить</button>
 					</p>
+					</form>
 				</div>
 			</article>
 		</section>

@@ -43,7 +43,7 @@ public class TestServlet extends HttpServlet {
     public TestServlet() throws FileNotFoundException, IOException {
         super();
         prop = new ConnectionProperty();
-    	props = prop.GetConProperties();
+    	//props = prop.GetConProperties();
     }
 
 	/**
