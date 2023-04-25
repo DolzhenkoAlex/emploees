@@ -34,8 +34,8 @@
 						<th>Фамилия</th>
 						<th>Имя</th>
 						<th>Должность</th>
-						<th>Телефон</th>
 						<th>Эл. почта</th>
+						<th>Телефон</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,6 +47,10 @@
 								<td>${person.getRole()}</td>
 								<td>${person.getPhone()}</td>
 								<td>${person.getEmail()}</td>
+								<td width="15"><a href='<c:url value="/delete" />'>
+									<img alt="Удалить" src="images/icon-delete.png"></a></td>
+								<td width="15"><a href='<c:url value="/update" />'>
+									<img alt="Редактировать" src="images/icon-edit.png"></a></td>
 							</tr>
 					</c:forEach>
 				</tbody>
@@ -83,6 +87,7 @@
 							<label for="email">Эл. почта </label>
 							<input type="text" name="email" />
 						</p>
+						<br/><br/><br/>
 						<p>
 							<button type="submit">Добавить</button>
 						</p>

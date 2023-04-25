@@ -9,22 +9,22 @@
 	 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-		<title>Главная страница</title>
-	</head>
-	<body>
-		<jsp:include page="/WEB-INF/jspf/header.jsp" />
-		<div id="main">
-			<h2>Функции системы</h2>
-			<nav>
-				<ul>
-					<li><a href="/employees/persons">Сотрудники</a>
-					<li><a href="/employees/roles">Должности</a>
-				</ul>
-			</nav>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>Главная страница</title>
+</head>
+<body>
+	<jsp:include page="/WEB-INF/jspf/header.jsp" />
+	<div id="main">
+		<h2>Функции системы</h2>
+		<nav>
+			<ul>
+				<li><a href="/employees/persons">Сотрудники</a>
+				<li><a href="/employees/roles">Должности</a>
+			</ul>
+		</nav>
 	</div>
-		<jsp:include page="/WEB-INF/jspf/footer.jsp" />
-	</body>
+	<jsp:include page="/WEB-INF/jspf/footer.jsp" />
+</body>
 </html>

@@ -1,5 +1,11 @@
 package controller;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,67 +14,98 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import dao.ConnectionProperty;
 import dao.EmpConnBuilder;
 import domain.Role;
 
 /**
- * Servlet implementation class RoleServlet
+ * Servlet implementation class DeleteRoleServlet
  */
-@WebServlet("/roles")
-public class RoleServlet extends HttpServlet {
+@WebServlet("/deleterole")
+public class DeleteRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	ConnectionProperty prop;
 	String select_all_role = "SELECT id, rolename FROM roles ORDER BY id";
-	String insert_role = "INSERT INTO roles(rolename) VALUES(?)";
+	String select_role_ById = "SELECT id, rolename FROM roles WHERE id = ?";
 	String delete_role = "DELETE FROM roles WHERE id = ?";
 	ArrayList<Role> roles = new ArrayList<Role>();
+	ArrayList<Role> deleteroles = new ArrayList<Role>();
 	String userPath;
-	
-    public RoleServlet() throws FileNotFoundException, IOException {
-    	prop = new ConnectionProperty();
+       
+    /**
+     * @throws IOException 
+     * @throws FileNotFoundException 
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteRoleServlet() throws FileNotFoundException, IOException {
+        super();
+        prop = new ConnectionProperty();
     }
-    
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		response.setContentType("text/html");
-		
+
 		EmpConnBuilder builder = new EmpConnBuilder();
 
 		// Загрузка всех должностей
 		try (Connection conn = builder.getConnection()) {
-			System.out.println("Connection to newrole succesfull!");
+			System.out.println("Connection to deleterole succesfull!");
+
+			String strId = request.getParameter("id");
+			Long id = null;
+			if (strId != null) {
+				id = Long.parseLong(strId);
+			}
+			System.out.println("Code deleting role: " + id);
+
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(select_all_role);
-			if(rs != null) {
+			if (rs != null) {
 				roles.clear();
 				while (rs.next()) {
 					roles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
 				}
 				rs.close();
-				System.out.println("Load newrole succesfull!");
+				System.out.println("Load deleting role succesfull!");
 				request.setAttribute("roles", roles);
-			}
-			else
-			{
+			} else {
 				System.out.println("Ошибка загрузки role");
 			}
-			
+
+			System.out.println("Edit roleId = " + id);
+
+			try (PreparedStatement preparedStatement = conn.prepareStatement(select_role_ById)) {
+				preparedStatement.setLong(1, id);
+				rs = preparedStatement.executeQuery();
+				if (rs != null) {
+					deleteroles.clear();
+					while (rs.next()) {
+						deleteroles.add(new Role(rs.getLong("id"), rs.getString("rolename")));
+					}
+					rs.close();
+					System.out.println("Load deleterole succesfull!");
+					request.setAttribute("rolesDelete", deleteroles);
+				} else {
+					System.out.println("Ошибка загрузки role");
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		} catch (Exception e) {
 			System.out.println(e);
-		} 
-			
+		}
+
 		userPath = request.getServletPath();
-		if("/roles".equals(userPath)){
-			request.getRequestDispatcher("/views/roles.jsp").forward(request, response);
+		if ("/deleterole".equals(userPath)) {
+			request.getRequestDispatcher("/views/deleterole.jsp").forward(request, response);
 		}
 	}
 
@@ -77,40 +114,11 @@ public class RoleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		EmpConnBuilder builder = new EmpConnBuilder();
-
-		try (Connection conn = builder.getConnection()) {
-			System.out.println("Connection to newperson succesfull!");
-		
-			String name = request.getParameter("namerole");
-			
-			System.out.println("New role = " + name);
-			
-				Role newRole = new Role(name);
-
-				try (PreparedStatement preparedStatement = conn.prepareStatement(insert_role)) {
-					preparedStatement.setString(1, newRole.getNamerole());
-					int result = preparedStatement.executeUpdate();
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-		} catch (Exception e) {
-			System.out.println(e);
-			getServletContext().getRequestDispatcher("/views/roles.jsp").forward(request, response);
-		}
-		finally {
-		doGet(request, response);}
-	}
-	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 	
 		EmpConnBuilder builder = new EmpConnBuilder();
 
 		try (Connection conn = builder.getConnection()) {
-			System.out.println("Connection to deleterole succesfull!");
-			
+			System.out.println("Connection to delperson succesfull!");
 			Long id = Long.parseLong(request.getParameter("id"));
 			
 			System.out.println("Del roleId = " + id);

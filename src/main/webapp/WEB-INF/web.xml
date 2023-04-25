@@ -19,4 +19,24 @@
     <servlet-name>TestServlet</servlet-name>
     <url-pattern>/TestServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteRoleServlet</display-name>
+    <servlet-name>DeleteRoleServlet</servlet-name>
+    <servlet-class>controller.DeleteRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteRoleServlet</servlet-name>
+    <url-pattern>/DeleteRoleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditRoleServlet</display-name>
+    <servlet-name>EditRoleServlet</servlet-name>
+    <servlet-class>controller.EditRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditRoleServlet</servlet-name>
+    <url-pattern>/EditRoleServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
