@@ -75,34 +75,23 @@
 		</section>
 		<section>
 			<article>
-				<h3>Добавление должности</h3>
+				<h3>Добавить должность</h3>
 				<div class="text-article">
 					<form method="POST" action="">
-						<!--  
+						<br>
+						<br>
 						<div class="mb-3 row">
-							<label for="namerole" class="col-sm-2 col-form-label">Должность: </label>
-    						<div class="col-sm-10">
-      								<input type="text" class="form-control" id="staticRole" value="Введите должность">
-    						</div>
-    					</div>
-    					<div class="mb-3 row">
-    						<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-    							<div class="col-sm-10">
-      								<input type="password" class="form-control" id="inputPassword">
-    							</div>
+							<label for="namerole" class="col-sm-3 col-form-label">Должность</label>
+							<div class="col-sm-6">
+								<input type="text" name="namerole" class="form-control"
+									id="staticRole" />
+							</div>
 						</div>
-						-->
-
-
-						<p>
-							<br> <label for="namerole">Должность</label> <input
-								type="text" name="namerole" value="Введите должность" />
-						</p>
 						<p>
 							<br> <br> <br> <br> <br>
 							<br> <br> <br>
-							<br>
 							<button type="submit" class="btn btn-primary">Добавить</button>
+							<br>
 						</p>
 					</form>
 				</div>

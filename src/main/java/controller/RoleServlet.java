@@ -26,7 +26,7 @@ public class RoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	ConnectionProperty prop;
-	String select_all_role = "SELECT id, rolename FROM roles ORDER BY id";
+	String select_all_role = "SELECT id, rolename FROM roles ORDER BY rolename ASC";
 	String insert_role = "INSERT INTO roles(rolename) VALUES(?)";
 	String delete_role = "DELETE FROM roles WHERE id = ?";
 	ArrayList<Role> roles = new ArrayList<Role>();
@@ -101,32 +101,5 @@ public class RoleServlet extends HttpServlet {
 		}
 		finally {
 		doGet(request, response);}
-	}
-	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	
-		EmpConnBuilder builder = new EmpConnBuilder();
-
-		try (Connection conn = builder.getConnection()) {
-			System.out.println("Connection to deleterole succesfull!");
-			
-			Long id = Long.parseLong(request.getParameter("id"));
-			
-			System.out.println("Del roleId = " + id);
-
-			try (PreparedStatement preparedStatement = conn.prepareStatement(delete_role)) {
-				preparedStatement.setLong(1, id);
-				int result = preparedStatement.executeUpdate();
-				System.out.println("Deleting row: "+result);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-
-			getServletContext().getRequestDispatcher("/views/roles.jsp").forward(request, response);
-		}
-		doGet(request, response);
 	}
 }

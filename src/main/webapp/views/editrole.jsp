@@ -16,7 +16,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Edit roles</title>
+<title>Редактирование должности</title>
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Bootstrap CSS -->
@@ -59,19 +59,27 @@
 				<h3>Редактирование должности</h3>
 				<div class="text-article">
 					<form method="POST" action="">
+						<br> <br> 
+						<div class="mb-3 row">
+							<label for="idrole" class="col-sm-4 col-form-label">Код должности</label>
+								<div class="col-sm-6"> 
+									<input type="text" class="form-control" readonly
+									value="${rolesEdit[0].getId()}" />
+								</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="namerole" class="col-sm-4 col-form-label">Должность</label> 
+							<div class="col-sm-6">
+								<input type="text" class="form-control" name="namerole"
+								value="${rolesEdit[0].getNamerole()}" />
+							</div>
+						</div>
+
 						<p>
-							<br /> <label for="idrole" class="col-form-label">Код
-								должности</label> <input type="text" readonly
-								value="${rolesEdit[0].getId()}" />
-						</p>
-						<br> <label for="namerole">Должность</label> <input
-							type="text" name="namerole" value="${rolesEdit[0].getNamerole()}" />
-						<p>
-							<br> <br> <br> <br> <br>
-							<br> <br>
+							<br>
 							<button type="submit" class="btn btn-primary">Редактировать</button>
 							<a href='<c:url value="/roles" />' role="button"
-								class="btn btn-secondary">Отменить</a>
+								class="btn btn-secondary">Отменить/Возврат</a>
 						</p>
 					</form>
 				</div>

@@ -28,7 +28,7 @@ public class PersonsServlet extends HttpServlet {
 	
 	ConnectionProperty prop;
 	String select_all_person = "SELECT id, firstName, lastname, "
-			+ "email, phone, roleid FROM persons";
+			+ "email, phone, roleid FROM persons ORDER BY lastname ASC";
 	String select_all_role = "SELECT id, rolename FROM roles";
 	String insert_person = "INSERT INTO persons( roleid, firstname, lastname, phone, email)"
 			+ "VALUES(?,?,?,?,?)";
@@ -79,7 +79,7 @@ public class PersonsServlet extends HttpServlet {
 					}
 				rs.close();
 				System.out.println("Load role succesfull!");
-				request.setAttribute("roles", roles);
+				request.setAttribute("roles", roles); // передача параметра roles в persons.jsp
 				}
 			else
 			{
@@ -110,7 +110,7 @@ public class PersonsServlet extends HttpServlet {
 				}
 				rs.close();
 				System.out.println("Load person succesfull!");
-				request.setAttribute("persons", persons);
+				request.setAttribute("persons", persons); // передача параметра persons в persons.jsp
 			}
 			else
 			{
@@ -165,13 +165,7 @@ public class PersonsServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			System.out.println(e);
-			
-			getServletContext().getRequestDispatcher("/views/persons.jsp")
-				.forward(request, response); 
 		}
-		
-		
-		
 		doGet(request, response);
 	}
 

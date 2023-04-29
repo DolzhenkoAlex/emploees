@@ -26,7 +26,7 @@ public class DeleteRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	ConnectionProperty prop;
-	String select_all_role = "SELECT id, rolename FROM roles ORDER BY id";
+	String select_all_role = "SELECT id, rolename FROM roles ORDER BY rolename ASC";
 	String select_role_ById = "SELECT id, rolename FROM roles WHERE id = ?";
 	String delete_role = "DELETE FROM roles WHERE id = ?";
 	ArrayList<Role> roles = new ArrayList<Role>();
@@ -132,8 +132,6 @@ public class DeleteRoleServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-
-			getServletContext().getRequestDispatcher("/views/roles.jsp").forward(request, response);
 		}
 		doGet(request, response);
 	}

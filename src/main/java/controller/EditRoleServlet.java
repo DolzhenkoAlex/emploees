@@ -26,7 +26,7 @@ public class EditRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	ConnectionProperty prop;
-	String select_all_role = "SELECT id, rolename FROM roles ORDER BY id";
+	String select_all_role = "SELECT id, rolename FROM roles ORDER BY rolename ASC";
 	String select_role_ById = "SELECT id, rolename FROM roles WHERE id = ?";
 	String edit_role = "UPDATE roles SET rolename = ? WHERE id = ?";
 	ArrayList<Role> roles = new ArrayList<Role>();
@@ -45,7 +45,8 @@ public class EditRoleServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		
@@ -56,7 +57,7 @@ public class EditRoleServlet extends HttpServlet {
 			System.out.println("Connection to editrole succesfull!");
 			
 			String strId = request.getParameter("id");
-			Long id = null;
+			Long id = null;     // id редактируемой должности
 			if(strId != null) {
 				id = Long.parseLong(strId);
 			}
@@ -79,6 +80,8 @@ public class EditRoleServlet extends HttpServlet {
 			}
 			
 			System.out.println("Edit roleId = " + id);
+			
+			
 
 			try (PreparedStatement preparedStatement = conn.prepareStatement(select_role_ById)) {
 				preparedStatement.setLong(1, id);
@@ -118,7 +121,8 @@ public class EditRoleServlet extends HttpServlet {
 		EmpConnBuilder builder = new EmpConnBuilder();
 
 		try (Connection conn = builder.getConnection()) {
-			System.out.println("Connection to editperson succesfull!");
+			
+			System.out.println("Connection to editrole succesfull!");
 
 			String strId = request.getParameter("id");
 			Long id = null;
@@ -140,6 +144,5 @@ public class EditRoleServlet extends HttpServlet {
 			System.out.println(e);
 		}
 		doGet(request, response);
-		getServletContext().getRequestDispatcher("/views/roles.jsp").forward(request, response);
 	}
 }
