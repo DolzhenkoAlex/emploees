@@ -92,6 +92,7 @@ public class RoleServlet extends HttpServlet {
 				try (PreparedStatement preparedStatement = conn.prepareStatement(insert_role)) {
 					preparedStatement.setString(1, newRole.getNamerole());
 					int result = preparedStatement.executeUpdate();
+					System.out.println("Adding "+result+" row");
 				} catch (Exception e) {
 					System.out.println(e);
 				}
