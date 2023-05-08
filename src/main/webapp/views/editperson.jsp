@@ -92,7 +92,7 @@
 							<label for="rolename" class="col-sm-4 col-form-label">Должность</label>
 							<div class="col-sm-7">
 								<select name="role" class="form-control">
-									<option >Выберите должность</option>
+									<option >Введите должность</option>
 									<c:forEach var="role" items="${roles}">
 										<option value="${role}">
 											<c:out value="${role.getNamerole()}"></c:out>

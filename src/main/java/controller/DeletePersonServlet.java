@@ -1,12 +1,9 @@
 package controller;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import dao.ConnectionProperty;
+import dao.EmpConnBuilder;
+import domain.Person;
+import domain.Role;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,10 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import dao.ConnectionProperty;
-import dao.EmpConnBuilder;
-import domain.Role;
-import domain.Person;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class DeletePersonServlet
